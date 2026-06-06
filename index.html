@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Animation Website</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0f172a;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Sections */
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s ease;
+}
+
+/* Different colors */
+.sec1 { background: #1e293b; }
+.sec2 { background: #0f766e; }
+.sec3 { background: #7c3aed; }
+.sec4 { background: #be123c; }
+
+/* Active animation */
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<body>
+
+<section class="sec1">🚀 Welcome Section</section>
+<section class="sec2">📱 About Section</section>
+<section class="sec3">🎨 Services Section</section>
+<section class="sec4">🏁 Contact Section</section>
+
+<script>
+// Scroll animation using Intersection Observer
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+sections.forEach(section => {
+  observer.observe(section);
+});
+</script>
+
+</body>
+</html>
